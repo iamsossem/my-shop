@@ -1,0 +1,23 @@
+<!-- @dsCard group="Status" height=96 subtitle="배지 · 칩 · 태그" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>Badge</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.row{display:flex;gap:var(--space-4);align-items:center;flex-wrap:wrap;padding:var(--space-6)}
+.best{padding:6px 12px;border-radius:var(--radius-pill);background:var(--green-800);color:var(--white);font-size:14px;font-weight:800}
+.count{padding:4px 10px;border-radius:var(--radius-pill);background:var(--green-800);color:var(--white);font-size:13px;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--radius-pill);background:var(--white);border:1px solid var(--line);color:var(--green-800);font-size:15px;font-weight:700}
+.tag{padding:4px 10px;border-radius:var(--radius-pill);border:1px dashed #8FAE98;font-size:13px;font-weight:600;color:var(--ink-muted)}
+.note{font-size:13px;font-weight:600;color:var(--ink-label)}
+</style></head>
+<body>
+<div class="row">
+  <span class="best">BEST 1</span>
+  <span class="count">2팩 담김</span>
+  <span class="chip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>매달 1회 정기배송</span>
+  <span class="tag">종</span><span class="tag">나이</span><span class="tag">취향</span>
+  <span class="note">예시 구성 · 확정 전</span>
+</div>
+</body>
+</html>

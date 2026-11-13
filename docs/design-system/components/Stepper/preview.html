@@ -1,0 +1,22 @@
+<!-- @dsCard group="Controls" height=96 subtitle="− n + 개수 조절" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>Stepper</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.row{display:flex;gap:var(--space-8);align-items:center;padding:var(--space-6)}
+.step{display:flex;align-items:center;gap:4px;padding:4px;border-radius:var(--radius-pill);background:var(--surface-stepper)}
+.step button{width:44px;height:44px;border-radius:50%;border:none;background:var(--white);color:var(--ink);font:700 22px var(--font-sans);cursor:pointer;transition:background .15s,color .15s}
+.step button:hover:not(:disabled){background:var(--green-800);color:var(--white)}
+.step button:disabled{opacity:.35;cursor:not-allowed}
+.step span{min-width:28px;text-align:center;font-size:18px;font-weight:800}
+.cap{font-size:13px;font-weight:600;color:var(--ink-label)}
+</style></head>
+<body>
+<div class="row">
+  <div class="step" role="group" aria-label="개수"><button type="button" aria-label="빼기" disabled>−</button><span>0</span><button type="button" aria-label="담기">+</button></div><span class="cap">0개 · − 비활성</span>
+  <div class="step" role="group" aria-label="개수"><button type="button" aria-label="빼기">−</button><span>3</span><button type="button" aria-label="담기">+</button></div><span class="cap">기본</span>
+  <div class="step" role="group" aria-label="개수"><button type="button" aria-label="빼기">−</button><span>8</span><button type="button" aria-label="담기" disabled>+</button></div><span class="cap">칸 가득 · + 비활성</span>
+</div>
+</body>
+</html>

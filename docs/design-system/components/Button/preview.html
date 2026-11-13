@@ -1,0 +1,27 @@
+<!-- @dsCard group="Actions" height=120 subtitle="핵심 · 보조 · 링크" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>Button</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.row{display:flex;gap:var(--space-6);align-items:center;flex-wrap:wrap;padding:var(--space-6)}
+.core{display:inline-flex;align-items:center;gap:12px;min-height:64px;box-sizing:border-box;padding:18px 40px;border-radius:var(--radius-pill);background:var(--point);color:var(--white);font-size:20px;font-weight:800;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
+.core:hover{background:var(--point-hover);transform:translateY(-2px);box-shadow:var(--shadow-core-hover)}
+.sub{display:inline-flex;align-items:center;min-height:52px;box-sizing:border-box;padding:14px 32px;border-radius:var(--radius-pill);border:2px solid var(--green-800);background:var(--white);color:var(--green-800);font-size:17px;font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+.sub:hover{background:var(--green-800);color:var(--white)}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:16px;font-weight:700;color:var(--green-800);text-decoration:none;padding:10px 0}
+.more:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid var(--green-800);outline-offset:3px}
+</style></head>
+<body>
+<div class="row">
+  <a href="#" class="core">박스 만들기 시작
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <a href="#" class="sub">박스 만들기로 이동</a>
+  <a href="#" class="more">더보기
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
+</div>
+</body>
+</html>

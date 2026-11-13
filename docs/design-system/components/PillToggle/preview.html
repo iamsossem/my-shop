@@ -1,0 +1,22 @@
+<!-- @dsCard group="Controls" height=96 subtitle="고양이 수 선택" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>PillToggle</title>
+<style>
+body{margin:0;background:var(--surface-tint);font-family:var(--font-sans);color:var(--ink)}
+.wrap{padding:var(--space-6);max-width:352px}
+.grp{display:flex;gap:var(--space-2)}
+.grp button{flex:1;min-height:44px;border-radius:var(--radius-pill);border:2px solid var(--green-800);background:var(--white);color:var(--green-800);font:700 15px var(--font-sans);cursor:pointer}
+.grp button[aria-checked="true"]{background:var(--green-800);color:var(--white)}
+.grp button:disabled{opacity:.4;cursor:not-allowed}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="grp" role="radiogroup" aria-label="고양이 수">
+    <button type="button" role="radio" aria-checked="false" disabled>1마리</button>
+    <button type="button" role="radio" aria-checked="true">2마리</button>
+    <button type="button" role="radio" aria-checked="false">3마리</button>
+  </div>
+</div>
+</body>
+</html>

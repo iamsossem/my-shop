@@ -1,0 +1,25 @@
+.pill-toggle {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.pill-toggle__item {
+  flex: 1;
+  min-height: 44px;
+  border: 2px solid var(--green-800);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--green-800);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pill-toggle__item[aria-checked='true'] {
+  background: var(--green-800);
+  color: var(--white);
+}
+
+.pill-toggle__item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

@@ -1,0 +1,40 @@
+<!-- @dsCard group="Box" height=300 subtitle="S05 내 박스 · 1마리 8칸" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>LunchBox</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.panel{margin:var(--space-6);width:352px;box-sizing:border-box;border-radius:var(--radius-lg);background:var(--surface-tint);padding:var(--space-6);display:flex;flex-direction:column;gap:18px}
+.top{display:flex;justify-content:space-between;align-items:center}
+h3{margin:0;font-size:22px;font-weight:800}
+.n{font-size:16px;font-weight:600;color:var(--ink-muted)} .n strong{font-size:22px;font-weight:800;color:var(--ink)}
+.box{position:relative;padding-top:22px}
+.ears{position:absolute;top:0;left:0;width:100%;height:30px}
+.ear{fill:var(--green-700);stroke:var(--green-700)} .in{fill:var(--ear-pink)}
+.body{position:relative;border-radius:22px;background:var(--green-700);padding:12px}
+.slots{border-radius:14px;background:var(--surface-inner);padding:10px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.slot{height:52px;border-radius:var(--radius-sm);border:none;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.slot:hover{transform:scale(1.06)}
+.empty{height:52px;box-sizing:border-box;border-radius:var(--radius-sm);border:1.5px dashed var(--green-300);display:flex;align-items:center;justify-content:center;color:#7FA088;font-size:18px;font-weight:600}
+.hint{margin:0;font-size:13px;color:var(--ink-muted)}
+</style></head>
+<body>
+<section class="panel">
+  <div class="top"><h3>내 박스</h3><span class="n"><strong>4</strong> / 8칸</span></div>
+  <div class="box">
+    <svg class="ears" viewBox="0 0 352 30" preserveAspectRatio="none" aria-hidden="true">
+      <path class="ear" d="M30 30 L46 4 L70 30 Z" stroke-width="6" stroke-linejoin="round"/><path class="ear" d="M282 30 L306 4 L322 30 Z" stroke-width="6" stroke-linejoin="round"/>
+      <path class="in" d="M42 28 L48 14 L58 28 Z"/><path class="in" d="M294 28 L304 14 L310 28 Z"/>
+    </svg>
+    <div class="body"><div class="slots">
+      <button type="button" class="slot" style="background:var(--pastel-coral)" aria-label="참치 스틱 칸 비우기"><span style="width:22px;height:8px;border-radius:4px;background:var(--snack-tuna);transform:rotate(-30deg)"></span></button>
+      <button type="button" class="slot" style="background:var(--pastel-coral)" aria-label="참치 스틱 칸 비우기"><span style="width:22px;height:8px;border-radius:4px;background:var(--snack-tuna);transform:rotate(-30deg)"></span></button>
+      <button type="button" class="slot" style="background:var(--pastel-butter)" aria-label="닭가슴살 트릿 칸 비우기"><span style="width:16px;height:16px;border-radius:50%;background:var(--snack-chicken)"></span></button>
+      <button type="button" class="slot" style="background:var(--pastel-peach)" aria-label="연어 큐브 칸 비우기"><span style="width:15px;height:15px;border-radius:4px;background:var(--snack-salmon);transform:rotate(12deg)"></span></button>
+      <span class="empty" role="img" aria-label="빈 칸">+</span><span class="empty" role="img" aria-label="빈 칸">+</span><span class="empty" role="img" aria-label="빈 칸">+</span><span class="empty" role="img" aria-label="빈 칸">+</span>
+    </div></div>
+  </div>
+  <p class="hint">담긴 칸을 누르면 그 칸이 비워져요.</p>
+</section>
+</body>
+</html>

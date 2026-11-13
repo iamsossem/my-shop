@@ -1,0 +1,93 @@
+/* P02·P03 공통 페이지 머리 */
+.page__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-12);
+  padding-bottom: var(--section-y);
+}
+
+.page__head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.page__eyebrow {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--green-800);
+}
+
+.page__title {
+  font-size: 40px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.page__desc {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.page__desc strong {
+  color: var(--ink);
+}
+
+/* P02 좌우 2단: 간식 카드 2열 + 오른쪽 400px 고정 */
+.builder {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-10);
+}
+
+.builder__snacks {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.builder__aside {
+  flex: 0 0 400px;
+  position: sticky;
+  top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* 담기 모션 중: 누른 카드는 살짝 커지고, 나머지 카드는 옅어진다 (누를 수는 있음) */
+.builder__snacks .snack-card {
+  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.builder__snacks--focus .snack-card:not(.snack-card--focus) {
+  opacity: 0.4;
+  transform: scale(0.96);
+}
+
+.builder__snacks--focus .snack-card:nth-child(2) { transition-delay: 0.04s; }
+.builder__snacks--focus .snack-card:nth-child(3) { transition-delay: 0.08s; }
+.builder__snacks--focus .snack-card:nth-child(4) { transition-delay: 0.12s; }
+.builder__snacks--focus .snack-card:nth-child(5) { transition-delay: 0.16s; }
+.builder__snacks--focus .snack-card:nth-child(6) { transition-delay: 0.2s; }
+
+.builder__snacks--focus .snack-card--focus {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.builder__snacks--focus .snack-card:not(.snack-card--focus):hover {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .builder__snacks .snack-card {
+    transition: none;
+  }
+}

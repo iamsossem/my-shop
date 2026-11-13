@@ -1,0 +1,84 @@
+/* 골라담냥 디자인 토큰 (docs/design-system/tokens.json, docs/06-site-design.md) */
+@font-face {
+  font-family: 'Pretendard GD';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 45 920;
+  font-display: swap;
+}
+
+:root {
+  /* 바탕·선 */
+  --white: #ffffff;
+  --surface-tint: #eef6ef;
+  --surface-hero: #cfe8d5;
+  --surface-inner: #f4faf5;
+  --surface-nav-active: #eef2ef;
+  --surface-stepper: #f2f6f3;
+  --line: #e3ebe4;
+
+  /* 글자 */
+  --ink: #17402a;
+  --ink-muted: #3e5a48;
+  --ink-label: #4e6b58;
+  --ink-hero-caption: #2e5a3e;
+
+  /* 브랜드 초록·포인트 */
+  --green-700: #2f7d4f;
+  --green-800: #245f3c;
+  --green-300: #a9c4af;
+  --green-200: #b7cdbb;
+  --dot-idle: #c5d6c9;
+  --arrow: #5e8a6c;
+  --point: #5b3fd0;
+  --point-hover: #4a30b8;
+
+  /* 파스텔 */
+  --pastel-butter: #fff1c9;
+  --pastel-peach: #ffdcd2;
+  --pastel-coral: #ffe3d8;
+  --pastel-mint: #d7f0de;
+  --pastel-sand: #f1eadb;
+  --pastel-mocha: #ebddd3;
+
+  /* 간식 색 */
+  --snack-tuna: #e98a6b;
+  --snack-chicken: #e2b44f;
+  --snack-salmon: #f08a6e;
+  --snack-pollack: #b99c6b;
+  --snack-duck: #9c6b4e;
+  --snack-crunch: #d9a23a;
+  --ear-pink: #f6b9a8;
+
+  /* 푸터 */
+  --footer-text: #dcebdf;
+  --footer-muted: #a9c9b1;
+  --footer-rule: #2f5a3f;
+
+  /* 글꼴 */
+  --font-sans: 'Pretendard GD', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  /* 간격 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 40px;
+  --space-10: 48px;
+  --space-12: 56px;
+  --gutter: 80px;
+  --section-y: 112px;
+  --page-width: 1280px;
+
+  /* 모서리 */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* 그림자 (hover 때만) */
+  --shadow-card-hover: 0 14px 30px rgba(23, 64, 42, 0.1);
+  --shadow-core-hover: 0 10px 24px rgba(91, 63, 208, 0.28);
+}

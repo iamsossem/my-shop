@@ -1,0 +1,318 @@
+.home {
+  position: relative;
+}
+
+/* S01 첫 화면: 전체 폭 대표 이미지, 왼쪽 정렬·아래쪽 배치 */
+.hero {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--surface-hero);
+}
+
+/* 배경 전체에 대표 사진(GridDistortion 캔버스)을 깐다. 이미지가 뜨기 전에는 surface-hero 바탕이 보인다 */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-top: 160px;
+  padding-bottom: 88px;
+}
+
+.hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--green-800);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hero__title {
+  font-size: 64px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+/* 제목 형광 밑줄 */
+.hero__mark {
+  background: linear-gradient(transparent 58%, var(--pastel-butter) 58%);
+}
+
+.hero__desc {
+  max-width: 540px;
+  margin-bottom: var(--space-4);
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--ink-hero-caption);
+}
+
+/* 홈 섹션 공통 */
+.home-section {
+  padding: var(--section-y) 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.home-section--tint {
+  background: var(--surface-tint);
+}
+
+.home-section__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.home-section__inner--wide {
+  gap: var(--space-12);
+}
+
+.home-section__action {
+  display: flex;
+  justify-content: center;
+}
+
+.home-section__status {
+  display: inline-block;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-label);
+}
+
+/* S11: 버튼은 슬라이드 조작 줄 아래에 따로 둔다 */
+.home-section__action--end {
+  justify-content: flex-end;
+}
+
+/* S02 베스트 박스: 큰 카드 2개를 좌우 번갈아(지그재그) 배치 */
+.best-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.best-box {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-10);
+  padding: var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.best-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.best-box--reverse {
+  flex-direction: row-reverse;
+}
+
+/* 파스텔 판 위에 사진. 흰 사진 바탕은 multiply로 판 색에 녹인다 */
+.best-box__image {
+  position: relative;
+  flex: 0 0 560px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.best-box__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transition: transform 0.4s ease;
+}
+
+.best-box:hover .best-box__image img {
+  transform: scale(1.04);
+}
+
+/* 간식 자리 표시 판: 원본 사진 비율(1376×768), 높이 100%로 가운데 정렬 = object-fit: cover와 같은 자리 */
+.best-box__spots {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 1376 / 768;
+  transform: translateX(-50%);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.best-box:hover .best-box__spots {
+  transform: translateX(-50%) scale(1.04);
+}
+
+.best-box__spot {
+  position: absolute;
+  translate: -50% -50%;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--green-800), 0 0 0 9999px rgba(23, 64, 42, 0.28);
+  animation: spot-in 0.25s ease-out, spot-pulse 1.6s ease-in-out 0.25s infinite;
+}
+
+.best-box__spot-label {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  translate: -50% 0;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--green-800);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.best-box__spot-label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 0;
+  border: 6px solid transparent;
+  border-top-color: var(--white);
+}
+
+@keyframes spot-in {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+}
+
+@keyframes spot-pulse {
+  50% {
+    scale: 1.05;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .best-box__spot {
+    animation: none;
+  }
+}
+
+.best-box__rank {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--green-800);
+  color: var(--white);
+  line-height: 1;
+}
+
+.best-box__rank small {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.best-box__rank strong {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.best-box__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-2);
+}
+
+.best-box__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.best-box__label {
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--green-800);
+}
+
+.best-box__name {
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* 구성품: 간식 사진 썸네일 + 이름 */
+.best-box__items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.best-box__items li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--surface-tint);
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 600;
+  cursor: default;
+  outline-offset: 2px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.best-box__items li.is-active {
+  background: var(--white);
+  box-shadow: inset 0 0 0 2px var(--green-800);
+}
+
+.best-box__thumb {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.best-box__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

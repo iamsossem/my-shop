@@ -1,0 +1,54 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>골라담냥</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--white); color:var(--ink); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .brand { fill:var(--green-700); }
+  .hero { fill:var(--surface-hero); }
+  .point { fill:var(--point); }
+  .slot { fill:var(--surface-inner); rx:var(--radius-sm); }
+  .slot.full { fill:var(--pastel-butter); }
+  .blk { rx:var(--radius-lg); }
+  .pill { rx:60px; }
+  .words { position:absolute; left:var(--space-12); bottom:var(--space-10); max-width:400px; }
+  .name { margin:0; font-size:104px; line-height:.95; font-weight:800; letter-spacing:-.04em; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 4px; font-size:14px; line-height:20px; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      green-700 264×288 slab bled off top+bottom (radius-lg) · point pill 240×120 bled off the right (rx = half of 120) · surface-hero 200×136 bled off the bottom (radius-lg)
+  arrangement one tall slab with two satellites on the right; nothing crosses x < 480 where the name sits
+  pattern     the 8-slot lunchbox: 4×2 compartment tiles cut by radius-sm inside the slab, three filled pastel-butter — "칸 하나 = 간식 1팩" is the brand's own geometry
+  scales      tiles 48×72, gap space-2 (8px), slab inset space-6 (24px); radii radius-sm, radius-lg, pill
+-->
+  <rect class="brand blk" x="0" y="-24" width="264" height="336"></rect>
+  <rect class="slot full" x="24" y="56" width="48" height="72"></rect>
+  <rect class="slot full" x="80" y="56" width="48" height="72"></rect>
+  <rect class="slot" x="136" y="56" width="48" height="72"></rect>
+  <rect class="slot full" x="192" y="56" width="48" height="72"></rect>
+  <rect class="slot" x="24" y="136" width="48" height="72"></rect>
+  <rect class="slot" x="80" y="136" width="48" height="72"></rect>
+  <rect class="slot" x="136" y="136" width="48" height="72"></rect>
+  <rect class="slot" x="192" y="136" width="48" height="72"></rect>
+  <rect class="point pill" x="288" y="24" width="240" height="120"></rect>
+  <rect class="hero blk" x="288" y="168" width="200" height="160"></rect>
+</svg>
+</div>
+<div class="words">
+  <h1 class="name">골라담냥</h1>
+  <p class="tag">맛도 개수도, 직접 골라 담는 고양이 수제간식 정기배송 박스</p>
+</div>
+</div>
+</body>
+</html>

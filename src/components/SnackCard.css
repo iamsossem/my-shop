@@ -1,0 +1,73 @@
+.snack-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.snack-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.snack-card--picked {
+  border-color: var(--green-700);
+}
+
+.snack-card__image {
+  position: relative;
+  height: 220px;
+}
+
+.snack-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.snack-card__badge {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--green-800);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.snack-card__info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 18px var(--space-5) var(--space-5);
+}
+
+.snack-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.snack-card__name {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.snack-card__price {
+  font-size: 16px;
+  color: var(--ink-muted);
+}
+
+.snack-card__price strong {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+}

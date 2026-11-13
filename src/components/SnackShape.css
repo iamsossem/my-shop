@@ -1,0 +1,49 @@
+.snack-shape {
+  display: block;
+}
+
+.snack-shape--tuna {
+  width: 22px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--snack-tuna);
+  transform: rotate(-30deg);
+}
+
+.snack-shape--chicken {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--snack-chicken);
+}
+
+.snack-shape--salmon {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  background: var(--snack-salmon);
+  transform: rotate(12deg);
+}
+
+.snack-shape--pollack {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--snack-pollack);
+}
+
+.snack-shape--duck {
+  width: 22px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--snack-duck);
+  transform: rotate(18deg);
+}
+
+.snack-shape--crunch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 5px solid var(--snack-crunch);
+  background: var(--pastel-butter);
+}

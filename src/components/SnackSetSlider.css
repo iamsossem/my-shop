@@ -1,0 +1,146 @@
+.set-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* 4번째 카드는 화면 오른쪽 끝에서 잘려 보인다 */
+.set-slider__viewport {
+  margin-right: calc(var(--gutter) * -1);
+  /* 카드가 hover로 떠오를 때 위·아래가 잘리지 않도록 여유를 둔다 */
+  margin-top: calc(var(--space-2) * -1);
+  padding: var(--space-2) 0 var(--space-4);
+  overflow: hidden;
+}
+
+.set-slider__track {
+  display: flex;
+  gap: var(--space-6);
+  transition: transform 0.8s ease;
+}
+
+/* 끝에서 처음으로 몰래 되돌릴 때는 애니메이션 없이 */
+.set-slider__track--instant {
+  transition: none;
+}
+
+/* 진행 점 + 좌우 이동 버튼 줄 */
+.set-slider__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: calc(var(--space-4) * -1);
+}
+
+.set-slider__arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.set-slider__arrow {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--green-800);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--green-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.set-slider__arrow:hover {
+  background: var(--green-800);
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .set-slider__track {
+    transition: none;
+  }
+}
+
+.set-card {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.set-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.set-card__image {
+  height: 200px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.set-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.set-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 var(--space-1) var(--space-1);
+}
+
+.set-card__name {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.set-card__tags {
+  display: flex;
+  gap: 6px;
+}
+
+/* 태그 데이터가 정해질 때까지 점선 */
+.set-card__tag {
+  padding: 4px 10px;
+  border: 1px dashed #8fae98;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.set-card__items {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.set-slider__dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.set-slider__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--dot-idle);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.set-slider__dot[aria-selected='true'] {
+  width: 28px;
+  background: var(--green-800);
+}

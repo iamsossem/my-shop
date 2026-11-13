@@ -1,0 +1,35 @@
+<!-- @dsCard group="Cards" height=420 subtitle="P02 간식 카드 · 기본 / 담김" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>SnackCard</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,336px);gap:var(--space-6);padding:var(--space-6)}
+.card{border-radius:var(--radius-lg);border:2px solid var(--line);background:var(--white);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-card-hover)}
+.card.on{border-color:var(--green-700)}
+.img{height:220px;display:flex;align-items:center;justify-content:center;position:relative}
+.cnt{position:absolute;top:16px;left:16px;padding:4px 10px;border-radius:var(--radius-pill);background:var(--green-800);color:var(--white);font-size:13px;font-weight:700}
+.info{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:18px 20px 20px}
+h3{margin:0 0 4px;font-size:20px;font-weight:700}
+p{margin:0;font-size:16px;color:var(--ink-muted)} p strong{font-size:18px;font-weight:800;color:var(--ink)}
+.step{display:flex;align-items:center;gap:4px;padding:4px;border-radius:var(--radius-pill);background:var(--surface-stepper)}
+.step button{width:44px;height:44px;border-radius:50%;border:none;background:var(--white);color:var(--ink);font:700 22px var(--font-sans);cursor:pointer}
+.step button:disabled{opacity:.35}
+.step span{min-width:28px;text-align:center;font-size:18px;font-weight:800}
+</style></head>
+<body>
+<div class="grid">
+  <article class="card on">
+    <div class="img" style="background:var(--pastel-coral)"><span class="cnt">2팩 담김</span><span aria-hidden="true" style="width:120px;height:34px;border-radius:17px;background:var(--snack-tuna);transform:rotate(-24deg)"></span></div>
+    <div class="info"><div><h3>참치 스틱</h3><p><strong>2,500원</strong> / 1팩</p></div>
+      <div class="step" role="group" aria-label="참치 스틱 개수"><button type="button" aria-label="빼기">−</button><span>2</span><button type="button" aria-label="담기">+</button></div></div>
+  </article>
+  <article class="card">
+    <div class="img" style="background:var(--pastel-mocha)"><span aria-hidden="true" style="width:120px;height:48px;border-radius:12px;background:var(--snack-duck);transform:rotate(16deg)"></span></div>
+    <div class="info"><div><h3>오리 져키</h3><p><strong>4,000원</strong> / 1팩</p></div>
+      <div class="step" role="group" aria-label="오리 져키 개수"><button type="button" aria-label="빼기" disabled>−</button><span>0</span><button type="button" aria-label="담기">+</button></div></div>
+  </article>
+</div>
+</body>
+</html>

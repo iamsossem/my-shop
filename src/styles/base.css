@@ -1,0 +1,95 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--green-800);
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--green-800);
+  outline-offset: 3px;
+}
+
+/* 1280px 기준 콘텐츠 폭: 좌우 gutter 80px */
+.container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* P02 담기 모션: 날아가는 간식 사진 복제본 (utils/flyToBox.js) */
+.fly-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.fly-item {
+  position: fixed;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-hover);
+  will-change: transform, opacity;
+}
+
+.fly-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

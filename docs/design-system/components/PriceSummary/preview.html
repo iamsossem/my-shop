@@ -1,0 +1,35 @@
+<!-- @dsCard group="Box" height=380 subtitle="S06 요약 + B04" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>PriceSummary</title>
+<style>
+body{margin:0;background:var(--white);font-family:var(--font-sans);color:var(--ink)}
+.col{margin:var(--space-6);width:352px;display:flex;flex-direction:column;gap:var(--space-5)}
+.sum{border-radius:var(--radius-lg);border:1px solid var(--line);padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.pol{margin:0;font-size:15px;font-weight:600;color:var(--green-800)}
+hr{border:0;height:1px;background:var(--line);margin:0}
+dl{margin:0;display:flex;flex-direction:column;gap:8px;font-size:16px}
+dl div{display:flex;justify-content:space-between} dt{color:var(--ink-muted)} dd{margin:0;font-weight:600}
+.tot{display:flex;justify-content:space-between;align-items:baseline}
+.tot span{font-size:17px;font-weight:700} .tot strong{font-size:28px;font-weight:800;letter-spacing:-.02em}
+.hint{margin:0;font-size:13px;color:var(--ink-muted)}
+.core{display:flex;align-items:center;justify-content:center;gap:12px;min-height:64px;border-radius:var(--radius-pill);background:var(--point);color:var(--white);font-size:20px;font-weight:800;text-decoration:none}
+</style></head>
+<body>
+<div class="col">
+  <section class="sum">
+    <div><p class="pol">매달 1회 정기배송 · 신청하면 5% 할인</p><p class="pol">상품 합계 30,000원 이상이면 배송비 무료</p></div>
+    <hr>
+    <dl>
+      <div><dt>상품 합계</dt><dd>11,500원</dd></div>
+      <div><dt>정기배송 할인 (5%)</dt><dd style="color:var(--green-800)">−575원</dd></div>
+      <div><dt>배송비</dt><dd>[미정]</dd></div>
+    </dl>
+    <div class="tot"><span>매달 결제 금액</span><strong>10,925원</strong></div>
+    <p class="hint">무료배송까지 18,500원 남았어요.</p>
+  </section>
+  <a href="#" class="core">정기배송 신청으로 이동
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+</body>
+</html>

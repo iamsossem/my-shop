@@ -1,0 +1,38 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--ink);
+}
+
+.logo__mark {
+  width: 44px;
+  height: 40px;
+}
+
+.logo--reverse .logo__mark {
+  border-radius: 8px;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo__ko {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.logo__en {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-label);
+}
+
+.logo--reverse {
+  color: var(--white);
+}

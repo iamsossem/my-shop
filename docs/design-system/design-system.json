@@ -1,0 +1,56 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Logos": {
+      "files": {
+        "golla-mark-reverse.svg": {
+          "blob": "c4004d5215731335fdbaf9a10f7cee70",
+          "name": "golla-mark-reverse.svg",
+          "size": 930,
+          "type": "image/svg+xml"
+        },
+        "golla-mark.svg": {
+          "blob": "4b97105405fd3abe94f3bb026e1b6c84",
+          "name": "golla-mark.svg",
+          "size": 879,
+          "type": "image/svg+xml"
+        },
+        "lunchbox-illustration.svg": {
+          "blob": "0f3c338a12f00b55cc04e7097edfe8fc",
+          "name": "lunchbox-illustration.svg",
+          "size": 1172,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Logos",
+      "order": [
+        "golla-mark.svg",
+        "golla-mark-reverse.svg",
+        "lunchbox-illustration.svg"
+      ],
+      "tile": "l"
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-11-13T02:58:00Z",
+    "v": 1
+  },
+  "docs": {
+    "sections": []
+  },
+  "groups": [
+    "Logos"
+  ],
+  "lastChange": {
+    "at": "2026-11-13T02:58:00Z",
+    "by": "스텔라",
+    "note": "P01 홈·P02 박스 만들기 시안에서 첫 디자인 시스템 생성",
+    "via": "Cowork"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "GollaDamnyang",
+  "sections": {},
+  "title": "골라담냥 디자인 시스템"
+}
