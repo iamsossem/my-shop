@@ -48,9 +48,54 @@
   letter-spacing: -0.035em;
 }
 
-/* 제목 형광 밑줄 */
+/* 제목 형광 밑줄: 제목이 올라온 뒤 왼쪽부터 그어진다 */
 .hero__mark {
-  background: linear-gradient(transparent 58%, var(--pastel-butter) 58%);
+  background: linear-gradient(transparent 58%, var(--pastel-butter) 58%) no-repeat left / 100% 100%;
+  animation: hero-mark 0.7s cubic-bezier(0.65, 0, 0.35, 1) 1s both;
+}
+
+@keyframes hero-mark {
+  from {
+    background-size: 0% 100%;
+  }
+}
+
+/* 첫 화면 등장: 제목은 줄 단위로 가려진 틀 아래에서 올라오고, 나머지는 차례로 떠오른다 */
+.hero__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.hero__line > span {
+  display: inline-block;
+  animation: hero-line 0.9s cubic-bezier(0.2, 0.75, 0.2, 1) var(--d, 0s) both;
+}
+
+@keyframes hero-line {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+.hero__in {
+  animation: hero-in 0.8s cubic-bezier(0.2, 0.75, 0.2, 1) var(--d, 0s) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__mark,
+  .hero__line > span,
+  .hero__in {
+    animation: none;
+  }
 }
 
 .hero__desc {
@@ -109,6 +154,11 @@
 }
 
 .best-box {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  position: relative;
   display: flex;
   align-items: stretch;
   gap: var(--space-10);
@@ -116,12 +166,38 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background: var(--white);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.5s cubic-bezier(0.2, 0.75, 0.2, 1), box-shadow 0.25s ease;
 }
 
 .best-box:hover {
-  transform: translateY(-4px);
+  transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-4px);
+  transition: transform 0.12s ease-out, box-shadow 0.25s ease;
   box-shadow: var(--shadow-card-hover);
+}
+
+/* 마우스 자리에 생기는 빛 반사 */
+.best-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.45), transparent 40%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.best-box:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .best-box,
+  .best-box:hover {
+    transform: none;
+  }
 }
 
 .best-box--reverse {

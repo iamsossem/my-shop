@@ -4,9 +4,10 @@ import Footer from '../components/Footer'
 import SectionTitle from '../components/SectionTitle'
 import SnackSetSlider from '../components/SnackSetSlider'
 import StepFlow from '../components/StepFlow'
+import Marquee from '../components/Marquee'
 import GridDistortion from '../components/GridDistortion'
 import { CoreLink, MoreLink, SubLink } from '../components/Buttons'
-import { BEST_BOXES, CAT_SETS } from '../data/home'
+import { BEST_BOXES, CAT_SETS, MARQUEE_ITEMS } from '../data/home'
 import { SNACK_BY_ID } from '../data/snacks'
 import heroImg from '../assets/P00/hero.png'
 import './Home.css'
@@ -25,8 +26,30 @@ function BestBox({ box, reverse }) {
   const [active, setActive] = useState(null)
   const spot = active ? box.spots[active] : null
 
+  // 3D 기울기: 마우스 위치에 따라 카드가 최대 6도까지 기울고, 그 자리에 빛 반사가 생긴다
+  const handleMove = (e) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = e.currentTarget
+    const r = el.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width
+    const y = (e.clientY - r.top) / r.height
+    el.style.setProperty('--ry', `${(x - 0.5) * 6}deg`)
+    el.style.setProperty('--rx', `${(0.5 - y) * 6}deg`)
+    el.style.setProperty('--gx', `${x * 100}%`)
+    el.style.setProperty('--gy', `${y * 100}%`)
+  }
+  const handleLeave = (e) => {
+    e.currentTarget.style.setProperty('--rx', '0deg')
+    e.currentTarget.style.setProperty('--ry', '0deg')
+  }
+
   return (
-    <li className={`best-box${reverse ? ' best-box--reverse' : ''}`}>
+    <li
+      className={`best-box${reverse ? ' best-box--reverse' : ''}`}
+      data-reveal
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
       <div className="best-box__image" style={{ background: box.bg }}>
         <img src={box.image} alt={`${box.name} 이미지`} />
         {/* 표시 자리 판: 사진과 같은 원본 비율로 가운데 맞춰, 잘린 사진과 위치가 일치한다 */}
@@ -99,23 +122,33 @@ export default function Home() {
           />
         </div>
         <div className="container hero__inner">
-          <span className="hero__chip">
+          <span className="hero__chip hero__in" style={{ '--d': '0.1s' }}>
             <CalendarIcon />
             매달 1회 정기배송 · 신청하면 5% 할인
           </span>
+          {/* 제목은 줄마다 아래에서 밀려 올라오고, 형광 밑줄이 왼쪽부터 그어진다 */}
           <h1 className="hero__title" id="hero-title">
-            간식 고민 끝,<br />
-            <span className="hero__mark">입맛대로 골라 담아요</span>
+            <span className="hero__line">
+              <span style={{ '--d': '0.25s' }}>간식 고민 끝,</span>
+            </span>
+            <span className="hero__line">
+              <span style={{ '--d': '0.4s' }}>
+                <span className="hero__mark">입맛대로 골라 담아요</span>
+              </span>
+            </span>
           </h1>
-          <p className="hero__desc">
+          <p className="hero__desc hero__in" style={{ '--d': '0.75s' }}>
             골라담냥은 우리 냥이가 좋아하는 수제간식을 맛과 개수까지 직접 골라 담아 매달 받아보는 정기배송 박스
             사이트예요.
           </p>
-          <div>
+          <div className="hero__in" style={{ '--d': '0.9s' }}>
             <CoreLink to="/box">박스 만들기 시작</CoreLink>
           </div>
         </div>
       </section>
+
+      {/* 첫 화면 아래 흐르는 띠 배너 */}
+      <Marquee items={MARQUEE_ITEMS} />
 
       {/* S02 베스트 간식 박스 */}
       <section className="home-section home-section--tint" aria-labelledby="best-title">
@@ -126,7 +159,7 @@ export default function Home() {
               <BestBox key={box.rank} box={box} reverse={i % 2 === 1} />
             ))}
           </ul>
-          <div className="home-section__action">
+          <div className="home-section__action" data-reveal>
             <SubLink to="/box">박스 만들기로 이동</SubLink>
           </div>
         </div>
@@ -142,7 +175,7 @@ export default function Home() {
             right={<span className="home-section__status">옆으로 넘기며 구경해 보세요 →</span>}
           />
           <SnackSetSlider sets={CAT_SETS} />
-          <div className="home-section__action home-section__action--end">
+          <div className="home-section__action home-section__action--end" data-reveal>
             <SubLink to="/box">나도 간식 박스 만들기</SubLink>
           </div>
         </div>
@@ -163,7 +196,7 @@ export default function Home() {
             }
           />
           <StepFlow />
-          <div className="home-section__action">
+          <div className="home-section__action" data-reveal>
             <SubLink to="/box">박스 만들기</SubLink>
           </div>
         </div>

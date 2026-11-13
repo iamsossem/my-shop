@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  /* 화면보다 길어지면 도시락 목록만 스크롤 (높이는 LunchBox.jsx에서 화면에 맞춰 계산) */
 }
 
 /* 담기 모션 중: 누른 카드는 살짝 커지고, 나머지 카드는 옅어진다 (누를 수는 있음) */
@@ -89,5 +90,65 @@
 @media (prefers-reduced-motion: reduce) {
   .builder__snacks .snack-card {
     transition: none;
+  }
+}
+
+/* 오른쪽 영역의 두 버튼: 장바구니 담기(핵심) + 장바구니로 이동(보조) 모두 폭 가득 */
+.builder__aside .btn-sub {
+  width: 100%;
+  margin-top: calc(var(--space-2) * -1);
+}
+
+/* 8칸을 채우기 전: P03 신청 버튼과 같은 비활성 모양 */
+.builder__aside .btn-core:disabled {
+  opacity: 0.4;
+  background: var(--point);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 장바구니 담기 알림: 화면 아래 가운데에서 떠올랐다가 4초 뒤 사라진다 */
+.cart-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-8);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: 14px 16px 14px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 16px 32px rgba(23, 64, 42, 0.28);
+  translate: -50% 0;
+  animation: toast-in 0.45s cubic-bezier(0.2, 0.75, 0.2, 1.2) both, toast-out 0.3s ease-in 3.7s forwards;
+}
+
+.cart-toast__link {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--pastel-butter);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }

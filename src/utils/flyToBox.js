@@ -6,9 +6,11 @@ export const FLY_STAGGER_MS = 40 // 장마다 출발 간격 (원문 0.04초)
 const EASE = 'cubic-bezier(0.45, 0, 0.55, 1)' // 원문 power2.inOut과 비슷한 곡선
 
 // 끝까지 다 날아가면 resolve. 남은 복제 사진은 스스로 지운다
-export function flyToBox(fromEl, toEl, bg) {
+// scrollDy: 목적지 칸이 들어 있는 목록이 이만큼 스크롤될 예정이면, 스크롤이 끝난 자리로 날아간다
+export function flyToBox(fromEl, toEl, bg, scrollDy = 0) {
   const from = fromEl.getBoundingClientRect()
-  const to = toEl.getBoundingClientRect()
+  const rect = toEl.getBoundingClientRect()
+  const to = { left: rect.left, top: rect.top - scrollDy, width: rect.width, height: rect.height }
   const dx = to.left + to.width / 2 - (from.left + from.width / 2)
   const dy = to.top + to.height / 2 - (from.top + from.height / 2)
   // 화면 위쪽 카드는 아래로, 아래쪽 카드는 위로 한 번 빠졌다가 박스로 향한다
@@ -52,4 +54,31 @@ export function flyToBox(fromEl, toEl, bg) {
   })
 
   return Promise.all(flights).then(() => layer.remove())
+}
+
+// 장바구니 담기 모션: 도시락 그림을 복제해 살짝 들어 올렸다가 상단 메뉴 장바구니로 날려 넣는다
+export function flyBoxToCart(fromEl, toEl) {
+  const from = fromEl.getBoundingClientRect()
+  const to = toEl.getBoundingClientRect()
+  const dx = to.left + to.width / 2 - (from.left + from.width / 2)
+  const dy = to.top + to.height / 2 - (from.top + from.height / 2)
+
+  const clone = fromEl.cloneNode(true)
+  clone.removeAttribute('id')
+  clone.querySelectorAll('[data-slot]').forEach((el) => el.removeAttribute('data-slot'))
+  clone.classList.add('fly-box')
+  clone.setAttribute('aria-hidden', 'true')
+  Object.assign(clone.style, { left: `${from.left}px`, top: `${from.top}px`, width: `${from.width}px`, height: `${from.height}px` })
+  document.body.append(clone)
+
+  const anim = clone.animate(
+    [
+      { offset: 0, transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1 },
+      { offset: 0.25, transform: 'translate(0, -24px) scale(1.06) rotate(-4deg)', opacity: 1 },
+      { offset: 0.85, opacity: 1 },
+      { offset: 1, transform: `translate(${dx}px, ${dy}px) scale(0.08) rotate(12deg)`, opacity: 0 },
+    ],
+    { duration: 1000, easing: EASE, fill: 'both' },
+  )
+  return anim.finished.catch(() => {}).then(() => clone.remove())
 }

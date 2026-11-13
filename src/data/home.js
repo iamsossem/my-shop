@@ -31,3 +31,6 @@ export const CAT_SETS = [
   { name: '생선에 바삭함 한 스푼', image: catSet3, bg: 'var(--pastel-peach)', items: ['salmon', 'crunch', 'tuna'] },
   { name: '담백한 맛 모음 세트', image: catSet4, bg: 'var(--pastel-mocha)', items: ['chicken', 'pollack', 'duck'] },
 ]
+
+// 홈 첫 화면 아래 흐르는 띠 배너 문구 (사이트 정책에서 가져옴)
+export const MARQUEE_ITEMS = ['매달 1회 정기배송', '신청하면 5% 할인', '6가지 수제간식', '30,000원 이상 무료배송', '입맛대로 골라 담기']

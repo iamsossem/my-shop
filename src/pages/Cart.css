@@ -1,0 +1,191 @@
+/* P04 장바구니 */
+.cart-list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cart-list__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-list__bar .btn-sub {
+  min-height: 44px;
+  padding: 10px 22px;
+  font-size: 15px;
+}
+
+.cart-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* 박스 카드: 체크 | 작은 도시락 | 구성 | 금액·삭제 */
+.cart-box {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 200px 1fr auto;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+}
+
+.cart-box:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.cart-box--selected {
+  border-color: var(--green-700);
+}
+
+.cart-box:not(.cart-box--selected) .cart-box__visual,
+.cart-box:not(.cart-box--selected) .cart-box__info {
+  opacity: 0.5;
+}
+
+.cart-box__name {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.cart-box__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-3);
+}
+
+.cart-box__items li {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.cart-box__items strong {
+  color: var(--green-800);
+}
+
+.cart-box__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.cart-box__price {
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cart-box__remove {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cart-box__remove:hover {
+  border-color: var(--green-800);
+  color: var(--green-800);
+}
+
+/* 체크박스: 진짜 input은 숨기고 둥근 네모로 그린다 (키보드 포커스는 그대로) */
+.cart-check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cart-check input {
+  position: absolute;
+  opacity: 0;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+}
+
+.cart-check__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--green-300);
+  border-radius: 9px;
+  background: var(--white);
+  color: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.cart-check input:checked + .cart-check__box {
+  border-color: var(--green-800);
+  background: var(--green-800);
+  color: var(--white);
+  transform: scale(1.08);
+}
+
+/* 체크 표시는 그려지듯 나타난다 */
+.cart-check__box path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.28s ease 0.08s;
+}
+
+.cart-check input:checked + .cart-check__box path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-check__box path {
+    transition: none;
+  }
+}
+
+.cart-check input:focus-visible + .cart-check__box {
+  outline: 3px solid var(--point);
+  outline-offset: 2px;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  border: 1px dashed var(--green-300);
+  border-radius: var(--radius-lg);
+  background: var(--surface-inner);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.builder__aside .btn-core:disabled {
+  opacity: 0.4;
+  background: var(--point);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

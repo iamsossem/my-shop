@@ -17,6 +17,5 @@ export const SNACKS = [
 
 export const SNACK_BY_ID = Object.fromEntries(SNACKS.map((s) => [s.id, s]))
 
-// 고양이 1마리당 도시락 8칸, 1~3마리
-export const SLOTS_PER_CAT = 8
-export const CAT_OPTIONS = [1, 2, 3]
+// 도시락(박스) 1개 = 8칸 = 간식 8팩. 8칸을 다 채워야 장바구니에 담을 수 있다
+export const BOX_SLOTS = 8

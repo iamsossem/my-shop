@@ -19,9 +19,9 @@ export default function Footer() {
           <div className="footer__cols">
             <div className="footer__col">
               <span className="footer__label">MENU</span>
-              <Link to="/">홈</Link>
-              <Link to="/box">박스 만들기</Link>
-              <Link to="/subscribe">정기배송 신청</Link>
+              <Link to="/" viewTransition>홈</Link>
+              <Link to="/box" viewTransition>박스 만들기</Link>
+              <Link to="/subscribe" viewTransition>정기배송 신청</Link>
             </div>
             <div className="footer__col">
               <span className="footer__label">DELIVERY</span>

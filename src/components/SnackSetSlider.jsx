@@ -65,7 +65,7 @@ export default function SnackSetSlider({ sets }) {
   const items = Array.from({ length: COPIES }, (_, c) => sets.map((set, i) => ({ set, key: `${c}-${i}`, clone: c !== 1 }))).flat()
 
   return (
-    <div className="set-slider" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <div className="set-slider" data-reveal onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="set-slider__viewport">
         <ul
           className={`set-slider__track${animate ? '' : ' set-slider__track--instant'}`}

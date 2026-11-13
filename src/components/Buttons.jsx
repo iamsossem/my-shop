@@ -20,7 +20,7 @@ function ChevronIcon() {
 // 핵심 버튼 (B01·B04·B06만): 페이지 이동은 <a>, 같은 화면 동작은 <button>
 export function CoreLink({ to, children, full = false }) {
   return (
-    <Link to={to} className={`btn-core${full ? ' btn-core--full' : ''}`}>
+    <Link to={to} viewTransition className={`btn-core${full ? ' btn-core--full' : ''}`}>
       {children}
       <ArrowIcon />
     </Link>
@@ -39,7 +39,7 @@ export function CoreButton({ children, full = false, ...props }) {
 // 보조 버튼 (B02·B03·B08)
 export function SubLink({ to, children }) {
   return (
-    <Link to={to} className="btn-sub">
+    <Link to={to} viewTransition className="btn-sub">
       {children}
     </Link>
   )
@@ -48,7 +48,7 @@ export function SubLink({ to, children }) {
 // 링크 (B09 더보기)
 export function MoreLink({ to, children }) {
   return (
-    <Link to={to} className="btn-more">
+    <Link to={to} viewTransition className="btn-more">
       {children}
       <ChevronIcon />
     </Link>

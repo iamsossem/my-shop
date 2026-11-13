@@ -52,3 +52,46 @@
   color: var(--ink);
   font-weight: 700;
 }
+
+/* 장바구니 박스 수 배지 */
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar__badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--point);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 22px;
+  text-align: center;
+}
+
+/* 장바구니 담기 모션이 도착하면 탄력 있게 튀어 오른다 */
+.navbar__badge--bump {
+  animation: badge-bump 0.6s cubic-bezier(0.3, 1.8, 0.5, 1);
+}
+
+@keyframes badge-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__badge--bump {
+    animation: none;
+  }
+}

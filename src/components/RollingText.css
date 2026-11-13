@@ -1,0 +1,34 @@
+.rolling {
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rolling__char {
+  display: inline-block;
+}
+
+/* 한 자리 = 글자 한 줄 높이 창. 안의 0~9 띠가 위아래로 굴러간다 */
+.rolling__digit {
+  display: inline-block;
+  height: 1.2em;
+  line-height: 1.2em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.rolling__strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.15);
+}
+
+.rolling__strip > span {
+  height: 1.2em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rolling__strip {
+    transition: none;
+  }
+}

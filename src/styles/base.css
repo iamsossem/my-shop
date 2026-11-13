@@ -93,3 +93,60 @@ input:focus-visible {
   height: 100%;
   object-fit: cover;
 }
+
+/* 스크롤 등장 모션 (utils/useScrollReveal.js). translate 속성만 써서 카드 자체의 transform(hover·기울기)과 겹치지 않는다 */
+.reveal-on [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+}
+
+.reveal-on [data-reveal][data-revealed] {
+  animation: reveal-up 0.8s cubic-bezier(0.2, 0.75, 0.2, 1) calc(var(--reveal-i, 0) * 90ms) backwards;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}
+
+/* 장바구니 담기 모션: 날아가는 도시락 복제본 */
+.fly-box {
+  position: fixed;
+  z-index: 100;
+  margin: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 16px 24px rgba(23, 64, 42, 0.25));
+  will-change: transform, opacity;
+}
+
+/* 페이지 전환 모션 (View Transitions): 이전 화면은 살짝 위로 빠지며 옅어지고, 새 화면은 아래에서 떠오른다.
+   지원하지 않는 브라우저는 그냥 바로 이동한다 */
+::view-transition-old(root) {
+  animation: page-out 0.22s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.42s cubic-bezier(0.2, 0.75, 0.25, 1) 0.08s both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

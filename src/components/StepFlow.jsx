@@ -28,7 +28,7 @@ const FALLBACK_ICONS = [
 
 const STEPS = [
   { title: '간식 고르기', desc: '6가지 수제간식 중 우리 냥이 입맛대로', image: step1, bg: 'var(--pastel-mint)' },
-  { title: '수량 담고 신청', desc: '고양이 수만큼 칸을 채우면 신청 끝', image: step2, bg: 'var(--pastel-butter)' },
+  { title: '장바구니 담고 신청', desc: '8칸을 채워 장바구니에 담으면 신청 끝', image: step2, bg: 'var(--pastel-butter)' },
   { title: '매달 1회 받아보기', desc: '한 달에 한 번, 박스가 알아서 찾아와요', image: step3, bg: 'var(--pastel-peach)' },
 ]
 
@@ -38,9 +38,9 @@ function StepIcon({ src, index }) {
   return <img className="step-flow__img" src={src} alt="" onError={() => setFailed(true)} />
 }
 
-function Arrow() {
+function Arrow({ index }) {
   return (
-    <li className="step-flow__arrow" aria-hidden="true">
+    <li className="step-flow__arrow" aria-hidden="true" data-reveal style={{ '--reveal-i': index * 2 + 1 }}>
       <svg viewBox="0 0 48 24" width="48" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 12h42M36 4l8 8-8 8" />
       </svg>
@@ -62,7 +62,7 @@ export default function StepFlow() {
 function StepItem({ step, index, last }) {
   return (
     <>
-      <li className="step-flow__step">
+      <li className="step-flow__step" data-reveal style={{ '--reveal-i': index * 2 }}>
         <div className="step-flow__disc" style={{ background: step.bg }}>
           <span className="step-flow__num">{index + 1}</span>
           <StepIcon src={step.image} index={index} />
@@ -72,7 +72,7 @@ function StepItem({ step, index, last }) {
           <p className="step-flow__desc">{step.desc}</p>
         </div>
       </li>
-      {!last && <Arrow />}
+      {!last && <Arrow index={index} />}
     </>
   )
 }
