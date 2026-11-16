@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRef } from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 import SectionTitle from '../components/SectionTitle'
@@ -11,6 +12,8 @@ import { BEST_BOXES, CAT_SETS, MARQUEE_ITEMS } from '../data/home'
 import { SNACK_BY_ID } from '../data/snacks'
 import heroImg from '../assets/P00/hero.png'
 import './Home.css'
+import SnackSetSwipe from '../components/SnackSetSwipe'
+import useIsTouch from '../utils/useIsTouch'
 
 function CalendarIcon() {
   return (
@@ -25,6 +28,8 @@ function CalendarIcon() {
 function BestBox({ box, reverse }) {
   const [active, setActive] = useState(null)
   const spot = active ? box.spots[active] : null
+  // 터치 기기 (#21): 탭하기 직전에 이미 켜져 있던 구성품이면, 그 탭은 표시를 끄는 탭이다
+  const tapWasActive = useRef(false)
 
   // 3D 기울기: 마우스 위치에 따라 카드가 최대 6도까지 기울고, 그 자리에 빛 반사가 생긴다
   const handleMove = (e) => {
@@ -83,6 +88,16 @@ function BestBox({ box, reverse }) {
               onMouseEnter={() => setActive(id)}
               onFocus={() => setActive(id)}
               onBlur={() => setActive(null)}
+              /* 터치 기기 (#21 축소): 탭하면 켜지고(기존 mouseenter·focus), 다시 탭하면 꺼진다. 마우스 클릭은 영향 없음 */
+              onPointerDown={(e) => {
+                tapWasActive.current = e.pointerType !== 'mouse' && active === id
+              }}
+              onClick={(e) => {
+                if (!tapWasActive.current) return
+                tapWasActive.current = false
+                setActive(null)
+                e.currentTarget.blur()
+              }}
             >
               <span className="best-box__thumb" style={{ background: SNACK_BY_ID[id].bg }}>
                 <img src={SNACK_BY_ID[id].image} alt="" />
@@ -98,6 +113,8 @@ function BestBox({ box, reverse }) {
 
 // P01 홈
 export default function Home() {
+  // 터치 기기에서만 바꿔 그리는 부분: 히어로 배경(#14~#16), 간식 세트 슬라이더(#22, #23)
+  const touch = useIsTouch()
   return (
     <div className="home">
       <NavBar overlay />
@@ -106,6 +123,8 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         {/* 배경: React Bits GridDistortion (마우스를 따라 격자 칸이 끌려가는 효과) */}
         <div className="hero__bg">
+          {/* 터치 기기: WebGL 대신 정지 사진 (#14 격자 왜곡, #15 클릭 물결, #16 시작 효과 제거) */}
+          {touch ? <img className="hero__bg-img" src={heroImg} alt="" /> : (
           <GridDistortion
             imageSrc={heroImg}
             grid={15}
@@ -120,6 +139,7 @@ export default function Home() {
             intro
             offsetX={0.16}
           />
+          )}
         </div>
         <div className="container hero__inner">
           <span className="hero__chip hero__in" style={{ '--d': '0.1s' }}>
@@ -174,7 +194,10 @@ export default function Home() {
             title="다른 집사들은 이렇게 담았어요"
             right={<span className="home-section__status">옆으로 넘기며 구경해 보세요 →</span>}
           />
+          {/* 터치 기기: 손가락으로 밀어 넘기는 슬라이더 (#22, #23) */}
+          {touch ? <SnackSetSwipe sets={CAT_SETS} /> : (
           <SnackSetSlider sets={CAT_SETS} />
+          )}
           <div className="home-section__action home-section__action--end" data-reveal>
             <SubLink to="/box">나도 간식 박스 만들기</SubLink>
           </div>

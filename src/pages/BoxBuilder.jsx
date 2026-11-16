@@ -9,10 +9,22 @@ import { useBox } from '../components/boxContext'
 import { BOX_SLOTS, SNACKS } from '../data/snacks'
 import { flyBoxToCart, flyToBox } from '../utils/flyToBox'
 import './BoxBuilder.css'
+import TouchBuilderBar from '../components/TouchBuilderBar'
+import { flyToBoxTouch } from '../utils/flyToBoxTouch'
+import useIsTouch from '../utils/useIsTouch'
+
+// 요소가 지금 화면 안에 다 보이는지 (bottomInset: 아래 고정 바에 가려지는 높이)
+const inView = (el, bottomInset = 0) => {
+  const r = el.getBoundingClientRect()
+  return r.width > 0 && r.top >= 0 && r.bottom <= window.innerHeight - bottomInset
+}
 
 // P02 박스 만들기
 export default function BoxBuilder() {
   const { order, full, nextSlot, add, removeOne, cart, addToCart } = useBox()
+  // 터치 기기 전용: 하단 고정 바(#31), 가벼운 담기 모션(#25)
+  const touch = useIsTouch()
+  const barRef = useRef(null)
   // 날아오는 중인 칸 번호들, 지금 강조 중인 카드
   const [pending, setPending] = useState([])
   const [focusId, setFocusId] = useState(null)
@@ -49,6 +61,20 @@ export default function BoxBuilder() {
     toastTimer.current = setTimeout(() => setToast(0), 4000)
   }
 
+  // 터치 기기 하단 바의 담기 (#32): 도시락이나 상단 메뉴가 화면 밖이면 화면 밖에서 날아오지 않도록 모션 없이 담는다
+  const handleAddToCartTouch = () => {
+    const boxEl = asideRef.current?.querySelector('.lunchbox__box')
+    const cartEl = document.querySelector('[data-cart-target]')
+    if (boxEl && cartEl && inView(boxEl, barRef.current?.offsetHeight ?? 0) && inView(cartEl)) return handleAddToCart()
+    if (!full) return
+    window.dispatchEvent(new Event('cart:landed'))
+    addToCart()
+    setPending([])
+    setToast((t) => t + 1)
+    clearTimeout(toastTimer.current)
+    toastTimer.current = setTimeout(() => setToast(0), 4000)
+  }
+
   // +를 누르면: 바로 담고(합계도 바로 반영), 사진 꼬리가 박스의 그 칸까지 날아간 뒤 칸이 채워진다
   const handleInc = (snack, imgEl) => {
     if (full) return
@@ -61,6 +87,23 @@ export default function BoxBuilder() {
     setFocusId(snack.id)
     clearTimeout(focusTimer.current)
     focusTimer.current = setTimeout(() => setFocusId(null), 1000)
+
+    // 터치 기기 (#25 축소): 사진 1장이 0.6초 만에 날아간다. 박스 칸이 화면 밖이면 하단 고정 바의 칸 수로 날린다
+    if (touch) {
+      requestAnimationFrame(() => {
+        const slotEl = asideRef.current?.querySelector(`[data-slot="${slot}"]`)
+        const bar = barRef.current
+        const barShown = bar && bar.offsetHeight > 0 && getComputedStyle(bar).display !== 'none'
+        const target = slotEl && barShown && !inView(slotEl, bar.offsetHeight) ? bar.querySelector('[data-fly-target]') : slotEl
+        const done = () => {
+          setPending((p) => p.filter((i) => i !== slot))
+          if (slot === BOX_SLOTS - 1) setCelebrate((c) => c + 1)
+        }
+        if (!target) return done()
+        flyToBoxTouch(imgEl, target, snack.bg).then(done)
+      })
+      return
+    }
 
     // 칸 번호가 그려진 다음 프레임에 목적지 위치를 잰다
     requestAnimationFrame(() => {
@@ -118,6 +161,9 @@ export default function BoxBuilder() {
           </aside>
         </div>
       </main>
+
+      {/* 터치 기기: '○/8칸 · 합계 · 담기' 하단 고정 바 (#31) */}
+      {touch && <TouchBuilderBar barRef={barRef} onAdd={handleAddToCartTouch} />}
 
       {/* 장바구니에 담았다는 알림 */}
       {toast > 0 && (

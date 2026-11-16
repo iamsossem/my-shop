@@ -1,0 +1,587 @@
+/* 터치 기기(휴대폰·태블릿) 반응형 레이아웃
+   데스크톱 레이아웃은 그대로 두고, 터치 기기에서만 화면 폭에 맞춰 덮어쓴다 (main.jsx에서 touch.css 다음에 불러옴)
+   - 태블릿: (hover: none) and (pointer: coarse) and (max-width: 1024px)
+   - 휴대폰: (hover: none) and (pointer: coarse) and (max-width: 767px) */
+
+/* ── 공통: 모든 터치 기기 ─────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  /* 가로로 삐져나온 요소 때문에 화면이 옆으로 밀리지 않게 */
+  html:root,
+  :root body {
+    overflow-x: clip;
+  }
+
+  /* 상단 메뉴를 화면 위에 고정: 장바구니 담기 모션(#32)의 목적지가 늘 보이게. 홈의 겹침 메뉴는 그대로 */
+  :root .navbar:not(.navbar--overlay) {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+  }
+
+  /* 고정 메뉴 아래로 오른쪽 sticky 영역이 숨지 않게 (넓은 태블릿에서 sticky가 남는 경우) */
+  :root .builder__aside {
+    top: calc(80px + var(--space-6));
+  }
+}
+
+/* ── 태블릿 이하 ─────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+  html:root {
+    --gutter: 32px;
+    --section-y: 80px;
+  }
+
+  /* 히어로 */
+  :root .hero__title {
+    font-size: 52px;
+  }
+
+  /* 섹션 제목 */
+  :root .section-title__title {
+    font-size: 30px;
+  }
+
+  /* 베스트 박스: 사진 위, 설명 아래로 */
+  :root .best-box,
+  :root .best-box--reverse {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  :root .best-box__image {
+    flex: none;
+    width: 100%;
+    height: 320px;
+  }
+
+  /* 박스 만들기·장바구니: 오른쪽 영역을 아래로 내리고 sticky를 푼다 */
+  :root .builder {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  :root .builder__aside {
+    position: static;
+    flex: none;
+  }
+
+  /* 정기배송 신청: 이미지 위, 입력 흐름 아래 (#39 이미지는 작게) */
+  :root .subscribe {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  :root .subscribe__visual {
+    flex: none;
+    height: 280px;
+  }
+
+  :root .subscribe__flow {
+    flex: none;
+  }
+
+  /* 3단계 흐름도 */
+  :root .step-flow__disc {
+    width: 140px;
+    height: 140px;
+  }
+
+  :root .step-flow__img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ── 휴대폰 ─────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) and (max-width: 767px) {
+  html:root {
+    --gutter: 20px;
+    --section-y: 56px;
+  }
+
+  /* 상단 메뉴: 높이를 줄이고, 로고는 마크만 */
+  :root .navbar__inner {
+    height: 64px;
+    gap: var(--space-3);
+  }
+
+  :root .navbar__logo .logo__text {
+    display: none;
+  }
+
+  :root .navbar__logo .logo__mark {
+    width: 38px;
+    height: 35px;
+  }
+
+  :root .navbar__menu {
+    gap: 2px;
+  }
+
+  :root .navbar__link {
+    padding: 8px 10px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  :root .navbar__badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+    line-height: 20px;
+  }
+
+  :root .builder__aside {
+    top: calc(64px + var(--space-6));
+  }
+
+  /* 히어로: 글자가 사진 위에서도 읽히도록 아래쪽을 흰색으로 덮는다 */
+  :root .hero {
+    min-height: 560px;
+  }
+
+  :root .hero__bg-img {
+    object-position: 50% 20%;
+  }
+
+  :root .hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0) 75%);
+    pointer-events: none;
+  }
+
+  :root .hero__inner {
+    gap: var(--space-3);
+    padding-top: 120px;
+    padding-bottom: var(--space-10);
+  }
+
+  :root .hero__chip {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  :root .hero__title {
+    font-size: 36px;
+  }
+
+  :root .hero__desc {
+    font-size: 16px;
+  }
+
+  /* 띠 배너 */
+  :root .marquee {
+    padding: 14px 0;
+  }
+
+  :root .marquee__item {
+    gap: var(--space-4);
+    padding-right: var(--space-4);
+    font-size: 17px;
+  }
+
+  /* 홈 섹션 공통 */
+  :root .home-section__inner {
+    gap: var(--space-6);
+  }
+
+  :root .home-section__inner--wide {
+    gap: var(--space-8);
+  }
+
+  :root .home-section__action--end {
+    justify-content: center;
+  }
+
+  /* 섹션 제목: 오른쪽 링크는 제목 아래로 */
+  :root .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  :root .section-title--center {
+    align-items: center;
+  }
+
+  :root .section-title__eyebrow {
+    font-size: 13px;
+  }
+
+  :root .section-title__title {
+    font-size: 26px;
+  }
+
+  :root .section-title__desc {
+    font-size: 16px;
+  }
+
+  /* 베스트 박스 */
+  :root .best-box {
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  :root .best-box__image {
+    height: 220px;
+  }
+
+  :root .best-box__rank {
+    top: var(--space-3);
+    left: var(--space-3);
+    width: 56px;
+    height: 56px;
+  }
+
+  :root .best-box__rank strong {
+    font-size: 22px;
+  }
+
+  :root .best-box__info {
+    gap: var(--space-4);
+    padding: 0;
+  }
+
+  :root .best-box__label {
+    font-size: 14px;
+  }
+
+  :root .best-box__name {
+    font-size: 24px;
+  }
+
+  :root .best-box__items li {
+    gap: var(--space-3);
+    font-size: 16px;
+  }
+
+  :root .best-box__thumb {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  /* 간식 세트 카드 */
+  :root .set-card__image {
+    height: 180px;
+  }
+
+  /* 3단계 흐름도 (세로 쌓기는 touch.css #24) */
+  :root .step-flow__disc {
+    width: 128px;
+    height: 128px;
+  }
+
+  :root .step-flow__img {
+    width: 72px;
+    height: 72px;
+  }
+
+  :root .step-flow__num {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  :root .step-flow__title {
+    font-size: 20px;
+  }
+
+  :root .step-flow__desc {
+    font-size: 15px;
+  }
+
+  /* 푸터: 위아래로 쌓는다 */
+  :root .footer__inner {
+    gap: var(--space-6);
+    padding-top: var(--space-10);
+  }
+
+  :root .footer__top {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  :root .footer__cols {
+    flex-wrap: wrap;
+    gap: var(--space-6) var(--space-8);
+  }
+
+  :root .footer__bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* P02·P03·P04 페이지 머리 */
+  :root .page__main {
+    gap: var(--space-6);
+    padding-top: var(--space-8);
+  }
+
+  :root .page__eyebrow {
+    font-size: 13px;
+  }
+
+  :root .page__title {
+    font-size: 28px;
+  }
+
+  :root .page__desc {
+    font-size: 16px;
+  }
+
+  /* P02 간식 카드: 2열 유지, 사진을 낮추고 이름·가격 아래에 스테퍼 */
+  :root .builder__snacks {
+    gap: var(--space-3);
+  }
+
+  :root .snack-card__image {
+    height: 140px;
+  }
+
+  :root .snack-card__badge {
+    top: var(--space-2);
+    left: var(--space-2);
+    font-size: 12px;
+  }
+
+  :root .snack-card__info {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    padding: var(--space-3);
+  }
+
+  :root .snack-card__name {
+    font-size: 16px;
+  }
+
+  :root .snack-card__price {
+    font-size: 13px;
+  }
+
+  :root .snack-card__price strong {
+    font-size: 15px;
+  }
+
+  :root .stepper {
+    justify-content: space-between;
+  }
+
+  /* 내 박스·요약 */
+  :root .lunchbox {
+    padding: var(--space-4);
+  }
+
+  :root .lunchbox__slot {
+    height: 60px;
+  }
+
+  :root .price-summary {
+    margin: 0;
+    padding: var(--space-6) var(--space-5);
+  }
+
+  :root .price-summary__total strong {
+    font-size: 24px;
+  }
+
+  /* 담기 완료 알림: 화면 폭에 맞춰 줄바꿈 */
+  :root .cart-toast {
+    left: var(--space-4);
+    right: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-3);
+    padding: 12px 12px 12px 18px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    translate: none;
+  }
+
+  /* P04 장바구니 카드: 체크·이름 / 도시락 / 금액·삭제 순서로 쌓는다 */
+  :root .cart-list__bar {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  :root .cart-box {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'check info'
+      'visual visual'
+      'side side';
+    gap: var(--space-3) var(--space-4);
+    padding: var(--space-4);
+  }
+
+  :root .cart-box > .cart-check {
+    grid-area: check;
+    align-self: start;
+  }
+
+  :root .cart-box__visual {
+    grid-area: visual;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  :root .cart-box__info {
+    grid-area: info;
+  }
+
+  :root .cart-box__side {
+    grid-area: side;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  :root .cart-box__name {
+    font-size: 18px;
+  }
+
+  :root .cart-box__items {
+    margin-top: var(--space-2);
+  }
+
+  :root .cart-box__remove {
+    min-height: 40px;
+    padding: 4px 16px;
+  }
+
+  :root .cart-empty {
+    padding: var(--space-6);
+    font-size: 16px;
+  }
+
+  /* P03 정기배송 신청 */
+  :root .subscribe {
+    gap: var(--space-6);
+  }
+
+  :root .subscribe__visual {
+    height: 200px;
+  }
+
+  :root .order-list {
+    padding: var(--space-4);
+  }
+
+  :root .order-list__head h2,
+  :root .apply-form h2 {
+    font-size: 20px;
+  }
+
+  :root .order-list__item {
+    font-size: 15px;
+  }
+
+  /* 신청할 박스가 없을 때: 안내 문구 아래에 링크 */
+  :root .order-list__empty {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  :root .apply-form {
+    margin: 0;
+  }
+
+  /* 완료 팝업 */
+  :root .modal {
+    padding: var(--space-5);
+  }
+
+  :root .modal__dialog {
+    width: 100%;
+    max-width: 440px;
+    padding: var(--space-8) var(--space-6) var(--space-6);
+  }
+
+  :root .modal__image {
+    width: 140px;
+  }
+
+  :root .modal__title {
+    font-size: 22px;
+  }
+}
+
+/* ── 박스 만들기: '내 박스'를 화면 아래에 고정 ─────────────────
+   오른쪽 영역의 내 박스(.lunchbox)를 그대로 화면 아래(하단 바 바로 위)에 붙인다.
+   같은 요소를 옮기는 것이라 담기 모션(칸으로 날아감), 칸 탭해서 비우기, 8칸 완성 연출이 그대로 동작한다.
+   칸 수는 하단 바에 이미 보이므로 제목 줄과 안내 문구는 숨겨 높이를 줄인다 */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+  :root {
+    --touch-box-h: 136px; /* 고정된 내 박스 높이 (아래 여백·알림 위치 계산용) */
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--touch-bar-h) + env(safe-area-inset-bottom));
+    z-index: 81;
+    gap: 0;
+    padding: var(--space-3) var(--gutter) var(--space-2);
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--white);
+    box-shadow: 0 -8px 24px rgba(23, 64, 42, 0.08);
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__head,
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__hint {
+    display: none;
+  }
+
+  /* 도시락 그림을 납작하게: 귀·테두리·칸을 줄이고, 넓은 화면에서는 가운데 520px까지만 */
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__box {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding-top: 14px;
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__ears {
+    height: 18px;
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__body {
+    padding: 6px;
+    border-radius: 16px;
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__grid {
+    gap: 4px;
+    padding: 6px;
+    border-radius: 11px;
+  }
+
+  :root .page:has(.touch-bar) .builder__aside .lunchbox__slot {
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  /* 하단 바는 내 박스와 한 덩어리로 보이게 위쪽 선·그림자를 뺀다 */
+  :root .page:has(.touch-bar) .touch-bar {
+    border-top: 0;
+    box-shadow: none;
+    background: var(--white);
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  /* 고정된 내 박스 + 하단 바에 내용이 가려지지 않게 아래 여백 */
+  :root .page:has(.touch-bar) .page__main {
+    padding-bottom: calc(var(--section-y) + var(--touch-bar-h) + var(--touch-box-h));
+  }
+
+  /* 담기 완료 알림은 내 박스 위로 */
+  :root .page:has(.touch-bar) .cart-toast {
+    bottom: calc(var(--touch-bar-h) + var(--touch-box-h) + var(--space-4));
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './PawCursor.css'
+import { isTouch } from '../utils/useIsTouch'
 
 const PAW = (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -29,6 +30,8 @@ export default function PawCursor() {
     const layer = layerRef.current
     const root = document.documentElement
     if (!fine || reduce || !paw || !layer) return undefined
+    // 터치 기기(휴대폰·태블릿)에서는 커서·발도장을 켜지 않는다 (docs/interaction.md #4, #5)
+    if (isTouch()) return undefined
 
     const onMove = (e) => {
       if (e.pointerType && e.pointerType !== 'mouse') return

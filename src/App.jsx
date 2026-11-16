@@ -34,6 +34,9 @@ function Layout() {
   )
 }
 
+// 배포 경로(/my-shop/) 아래에서도 주소가 맞도록 vite의 base를 라우터 기준 경로로 쓴다
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -44,7 +47,7 @@ const router = createBrowserRouter([
       { path: '/subscribe', element: <Subscribe /> },
     ],
   },
-])
+], { basename })
 
 function App() {
   return <RouterProvider router={router} />

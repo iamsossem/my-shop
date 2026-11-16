@@ -1,0 +1,36 @@
+/* 터치 기기 전용 간식 세트 슬라이더 (components/SnackSetSwipe.jsx, interaction #22)
+   데스크톱 슬라이더(.set-slider) 모양은 그대로 쓰고, --swipe일 때만 가로 스크롤 + 카드마다 멈춤으로 바꾼다 */
+.set-slider--swipe .set-slider__viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.set-slider--swipe .set-slider__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* 오른쪽 여백 = 보이는 폭 − 카드 1장: 마지막 카드도 다른 카드처럼 왼쪽 끝에 맞춰 멈출 수 있게 */
+.set-slider--swipe .set-slider__track {
+  width: max-content;
+  padding-right: calc(100% - min(300px, 78vw));
+  transition: none;
+}
+
+/* 고정 300px 대신 좁은 화면에서는 화면 폭의 78%까지만 */
+.set-slider--swipe .set-card {
+  flex-basis: min(300px, 78vw);
+  scroll-snap-align: start;
+}
+
+/* 진행 점: 보이는 크기(8px)는 그대로, 손가락으로 누르는 영역만 44px 높이로 넓힌다 */
+.set-slider--swipe .set-slider__dot {
+  position: relative;
+}
+
+.set-slider--swipe .set-slider__dot::before {
+  content: '';
+  position: absolute;
+  inset: -18px -4px;
+}
