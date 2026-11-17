@@ -72,9 +72,11 @@ export default function SnackSetSwipe({ sets }) {
               <div className="set-card__info">
                 <h3 className="set-card__name">{set.name}</h3>
                 <div className="set-card__tags">
-                  <span className="set-card__tag">종</span>
-                  <span className="set-card__tag">나이</span>
-                  <span className="set-card__tag">취향</span>
+                  {set.tags.map((tag) => (
+                    <span key={tag} className="set-card__tag">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
                 <p className="set-card__items">{set.items.map((id) => SNACK_BY_ID[id].name).join(' · ')}</p>
               </div>

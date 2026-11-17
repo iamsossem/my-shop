@@ -24,12 +24,12 @@ export const BEST_BOXES = [
   },
 ]
 
-// S11 다른 집사들의 간식 세트 (시안 기준 예시 4개, 태그 데이터 [미정])
+// S11 다른 집사들의 간식 세트 (운영자가 정한 예시 4개). tags: 종 · 나이 · 취향 (사진에 맞춘 예시값)
 export const CAT_SETS = [
-  { name: '참치·연어 듬뿍 세트', image: catSet1, bg: 'var(--pastel-butter)', items: ['tuna', 'chicken', 'salmon'] },
-  { name: '오독오독 씹는 맛 세트', image: catSet2, bg: 'var(--pastel-mint)', items: ['pollack', 'duck', 'crunch'] },
-  { name: '생선에 바삭함 한 스푼', image: catSet3, bg: 'var(--pastel-peach)', items: ['salmon', 'crunch', 'tuna'] },
-  { name: '담백한 맛 모음 세트', image: catSet4, bg: 'var(--pastel-mocha)', items: ['chicken', 'pollack', 'duck'] },
+  { name: '참치·연어 듬뿍 세트', tags: ['코리안 숏헤어', '3살', '생선파'], image: catSet1, bg: 'var(--pastel-butter)', items: ['tuna', 'chicken', 'salmon'] },
+  { name: '오독오독 씹는 맛 세트', tags: ['러시안 블루', '2살', '씹는 맛파'], image: catSet2, bg: 'var(--pastel-mint)', items: ['pollack', 'duck', 'crunch'] },
+  { name: '생선에 바삭함 한 스푼', tags: ['브리티시 숏헤어', '7살', '바삭파'], image: catSet3, bg: 'var(--pastel-peach)', items: ['salmon', 'crunch', 'tuna'] },
+  { name: '담백한 맛 모음 세트', tags: ['다묘 2마리', '4·5살', '담백파'], image: catSet4, bg: 'var(--pastel-mocha)', items: ['chicken', 'pollack', 'duck'] },
 ]
 
 // 홈 첫 화면 아래 흐르는 띠 배너 문구 (사이트 정책에서 가져옴)
